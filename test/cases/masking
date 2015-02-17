@@ -1,0 +1,5 @@
+"\x81\x85\xde\xad\xbe\xef\xb6\xc8\xd2\x83\xb1"
+
+data_begin: text
+data_payload: 'hello'
+data_end
