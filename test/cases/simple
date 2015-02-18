@@ -1,4 +1,4 @@
-"\x81\x05hello\x82\x07goodbye\x88\x0ca ping frame\x89\x0ca pong frame\x8a\x0bseeya later"
+"\x81\x05hello\x82\x07goodbye\x89\x0ca ping frame\x8a\x0ca pong frame\x88\x0bseeya later"
 
 data_begin: text
 data_payload: 'hello'

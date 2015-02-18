@@ -7,9 +7,9 @@
 typedef enum {
     WS_FRAME_TEXT   = 0x1,
     WS_FRAME_BINARY = 0x2,
-    WS_FRAME_PING   = 0x8,
-    WS_FRAME_PONG   = 0x9,
-    WS_FRAME_CLOSE  = 0xA,
+    WS_FRAME_CLOSE  = 0x8,
+    WS_FRAME_PING   = 0x9,
+    WS_FRAME_PONG   = 0xA,
 }
 ws_frame_type_t;
 
