@@ -16,7 +16,7 @@ test: test/parse
 clean:
 	rm -f ws_parser.o test/parse test/parse.o
 
-ws_parser.o: ws_parser.h
+%.o: ws_parser.h
 
 test/parse: test/parse.o ws_parser.o
 test/parse.o: CFLAGS+=-iquote .
