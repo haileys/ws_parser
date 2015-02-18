@@ -132,7 +132,7 @@ ws_parser_execute(ws_parser_t* parser, /* mutates! */ char* buff, size_t len)
 
                 ADVANCE;
 
-                if(parser->bytes_remaining == 0) {
+                if(parser->state == S_PAYLOAD && parser->bytes_remaining == 0) {
                     goto end_of_payload;
                 }
 
@@ -228,7 +228,13 @@ ws_parser_execute(ws_parser_t* parser, /* mutates! */ char* buff, size_t len)
                 parser->mask[3] = cur_byte;
                 parser->state = S_PAYLOAD;
 
-                ADVANCE_AND_BREAK;
+                ADVANCE;
+
+                if(parser->bytes_remaining == 0) {
+                    goto end_of_payload;
+                }
+
+                break;
             }
             case S_PAYLOAD: {
                 size_t chunk_length = len;
