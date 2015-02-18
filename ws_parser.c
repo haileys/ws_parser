@@ -243,10 +243,16 @@ ws_parser_execute(ws_parser_t* parser, /* mutates! */ char* buff, size_t len)
                     }
                 }
 
+                int rc;
+
                 if(parser->control) {
-                    parser->callbacks->on_control_payload(parser->user_data, buff, chunk_length);
+                    rc = parser->callbacks->on_control_payload(parser->user_data, buff, chunk_length);
                 } else {
-                    parser->callbacks->on_data_payload(parser->user_data, buff, chunk_length);
+                    rc = parser->callbacks->on_data_payload(parser->user_data, buff, chunk_length);
+                }
+
+                if(rc) {
+                    return rc;
                 }
 
                 buff += chunk_length;
