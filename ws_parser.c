@@ -33,7 +33,8 @@ ws_parser_init(ws_parser_t* parser, ws_parser_callbacks_t* callbacks)
     parser->fragment = 0;
 }
 
-#define ADVANCE_AND_BREAK { buff++; len--; break; }
+#define ADVANCE           { buff++; len--; }
+#define ADVANCE_AND_BREAK { ADVANCE; break; }
 
 int
 ws_parser_execute(ws_parser_t* parser, /* mutates! */ char* buff, size_t len)
@@ -129,11 +130,13 @@ ws_parser_execute(ws_parser_t* parser, /* mutates! */ char* buff, size_t len)
                     }
                 }
 
+                ADVANCE;
+
                 if(parser->bytes_remaining == 0) {
                     goto end_of_payload;
                 }
 
-                ADVANCE_AND_BREAK;
+                break;
             }
             case S_LENGTH_16_0: {
                 parser->bytes_remaining = (uint64_t)cur_byte << 8;
