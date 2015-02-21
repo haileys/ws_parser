@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -pedantic -Werror -std=c99
+CFLAGS += -Wall -Wextra -pedantic -Werror -std=c99
 
 ifdef DEBUG
 	CFLAGS += -g -DWS_PARSER_DUMP_STATE
