@@ -25,7 +25,7 @@ ws_parser_callbacks_t;
 
 typedef struct {
     void* user_data;
-    ws_parser_callbacks_t* callbacks;
+    const ws_parser_callbacks_t* callbacks;
 
     // private:
     uint64_t bytes_remaining;
@@ -40,7 +40,7 @@ typedef struct {
 ws_parser_t;
 
 void
-ws_parser_init(ws_parser_t* parser, ws_parser_callbacks_t* callbacks);
+ws_parser_init(ws_parser_t* parser, const ws_parser_callbacks_t* callbacks);
 
 #define WS_PARSER_ERROR_CODES(XX) \
     XX(WS_OK,                    0) \

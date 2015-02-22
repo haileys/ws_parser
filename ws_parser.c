@@ -25,7 +25,7 @@ enum {
 };
 
 void
-ws_parser_init(ws_parser_t* parser, ws_parser_callbacks_t* callbacks)
+ws_parser_init(ws_parser_t* parser, const ws_parser_callbacks_t* callbacks)
 {
     parser->user_data = NULL;
     parser->callbacks = callbacks;
