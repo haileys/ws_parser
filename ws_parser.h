@@ -24,23 +24,16 @@ typedef struct {
 ws_parser_callbacks_t;
 
 typedef struct {
-    void* user_data;
-    const ws_parser_callbacks_t* callbacks;
-
-    // private:
     uint64_t bytes_remaining;
     uint8_t mask[4];
-    unsigned fragment  : 1;
-    unsigned fin       : 1;
-    unsigned control   : 1;
-    unsigned mask_flag : 1;
-    unsigned mask_pos  : 2;
-    unsigned state     : 5;
+    uint8_t fragment  : 1;
+    uint8_t fin       : 1;
+    uint8_t control   : 1;
+    uint8_t mask_flag : 1;
+    uint8_t mask_pos  : 2;
+    uint8_t state     : 5;
 }
 ws_parser_t;
-
-void
-ws_parser_init(ws_parser_t* parser, const ws_parser_callbacks_t* callbacks);
 
 #define WS_PARSER_ERROR_CODES(XX) \
     XX(WS_OK,                    0) \
@@ -57,8 +50,16 @@ enum {
     #undef XX
 };
 
+void
+ws_parser_init(ws_parser_t* parser);
+
 int
-ws_parser_execute(ws_parser_t* parser, /* mutates! */ char* buff, size_t len);
+ws_parser_execute(
+    ws_parser_t* parser,
+    const ws_parser_callbacks_t* callbacks,
+    void* data,
+    char* buff /* mutates! */,
+    size_t len);
 
 const char*
 ws_parser_error(int rc);
